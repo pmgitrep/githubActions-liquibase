@@ -22,7 +22,7 @@ jobs:
     - name: Run 'Liquibase update' in a Docker Container
       uses: docker://liquibase/liquibase:latest
       with:
-        args: --url=${{ secrets.SF_URL }}/?db=testdb2&schema=public --changeLogFile=./Docker/changeLog.h2.sql --username=${{ secrets.SF_USERNAME}} --password=${{ secrets.SF_PASSWORD }} --logLevel=debug update
+        args: --url=${{ secrets.SF_URL }} --changeLogFile=./Docker/changeLog.h2.sql --username=${{ secrets.SF_USERNAME}} --password=${{ secrets.SF_PASSWORD }} --logLevel=debug update
 
         
         
