@@ -1,4 +1,4 @@
-name: Liquibase_Docker_GitHub-Hosted
+name: Liquibase_Action
 
 on:
   workflow_dispatch:
@@ -17,12 +17,9 @@ jobs:
     - name: Run 'Liquibase status' in a Docker Container	    
       uses: docker://liquibase/liquibase:latest
       with:
-        args: --url=${{ secrets.SF_URL }} --changeLogFile=./Docker/changeLog.h2.sql --username=${{ secrets.SF_USERNAME}} --password=${{ secrets.SF_PASSWORD }} status --verbose
+        args: --url="jdbc:h2:mem:liquibase_dev" --changeLogFile=./Docker/changeLog.h2.sql --username=admin --password=password status --verbose
     
     - name: Run 'Liquibase update' in a Docker Container
       uses: docker://liquibase/liquibase:latest
       with:
-        args: --url=${{ secrets.SF_URL }} --changeLogFile=./Docker/changeLog.h2.sql --username=${{ secrets.SF_USERNAME}} --password=${{ secrets.SF_PASSWORD }} --logLevel=debug update
-
-        
-        
+        args: --url="jdbc:h2:mem:liquibase_dev" --changeLogFile=./Docker/changeLog.h2.sql --username=admin --password=password --logLevel=debug update
